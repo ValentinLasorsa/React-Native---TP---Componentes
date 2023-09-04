@@ -19,12 +19,12 @@ const LogIn = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      
       <Text style={styles.title}>Log in</Text>
+      <Image style={styles.image} source={require('../../assets/iconlogin.png')} />
       <TextInput style={styles.input} placeholder="Usuario" value={username} onChangeText={setUsername}/>
       <TextInput style={styles.input} placeholder="Contraseña" secureTextEntry value={password} onChangeText={setPassword}
       />
-      <Button title="LogIn" onPress={handleLogin} />
+      <Button style={styles.button} title="LogIn" onPress={handleLogin} />
     </View>
   );
 };
@@ -46,6 +46,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'space-around',
+  },    
+  button:{
+    backgroundColor: 'rgba(39, 39, 39, 1)',
+    width: 200,
+    marginHorizontal: 50,
+    marginVertical: 10,
   },
 });
 

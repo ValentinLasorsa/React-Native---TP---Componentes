@@ -26,11 +26,26 @@ const App = () => {
 const PageTabs = () => {
     return (
       
-        <Tab.Navigator
+        <Tab.Navigator screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
+              if (route.name === '2') {
+                iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
+              } else if (route.name === 'Home') {
+                iconName = focused ? 'md-home' : 'md-home-outline';
+              }
+              else if(route.name === '3'){
+                iconName = focused ? 'ios-person' : 'ios-person-outline'
+              }
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: 'black',
+            tabBarInactiveTintColor: 'gray',
+          })}
         >
-          <Tab.Screen name="Screen1" component={Screen1} />
-          <Stack.Screen name="Screen2" component={Screen2}/>
-          <Stack.Screen name="Screen3" component={Screen3}/>
+          <Tab.Screen name="1" component={Screen1} />
+          <Stack.Screen name="2" component={Screen2}/>
+          <Stack.Screen name="3" component={Screen3}/>
         </Tab.Navigator>
       
     );
