@@ -8,7 +8,7 @@ const Screen3 = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Estás en la screen 3</Text>
-            <Button title="LogOut" onPress={handleLogout} />
+            <Button style={styles.button} title="LogOut" onPress={handleLogout} />
         </View>
     );
 };
@@ -22,6 +22,11 @@ const styles = StyleSheet.create({
         fontSize: 24,
         marginBottom: 20,
     },
+    button:{
+
+        marginHorizontal: 50,
+        marginVertical: 10,
+      },
 });
 
 export default Screen3;
