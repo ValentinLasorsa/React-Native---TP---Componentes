@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, Image, TextInput, Button, StyleSheet, SafeAreaView } from 'react-native';
 import Boton from '../Components/Boton';
-import MessageConstants from '../MessageConstants';
-import UsuarioService from '../Services/UsuarioService';
+import msjConstantes from '../msjConstantes';
+import ServicioUsuario from '../Service/ServicioUsuario';
 
 const LogIn = ({navigation}) => {
-  let service = new UsuarioService();
+  let service = new ServicioUsuario();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const passwordRef = useRef();
-  const staticImage = require('../../assets/Logo_Login.png')
+  const staticImage = require('../../assets/LogoImg.png')
 
   const handleLogin = async() => {
     if (username !== "" && password !== "") {    

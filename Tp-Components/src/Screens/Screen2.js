@@ -1,9 +1,9 @@
 import React from 'react';
-import { ToastAndroid } from 'react-native';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { ToastAndroid } from 'react-native';
 import Boton from '../Components/Boton';
 import msjConstantes from '../msjConstantes';
-import ServicioUsuario from '../Services/ServicioUsuario';
+import ServicioUsuario from '../Service/ServicioUsuario';
 
 const Screen2 = ({ navigation }) => {
 

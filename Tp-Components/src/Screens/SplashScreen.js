@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import {Image, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
 import Logo from "../../assets/Logo.png";
-import UsuarioService from "../Services/UsuarioService";
+import ServicioUsuario from "../Service/ServicioUsuario";
 
 const SplashScreen = ({navigation}) => { 
-    let usuarioService = new UsuarioService();
+    let servicioUsuario = new ServicioUsuario();
 
     const verificarLogIn = async() => {
-      if(await usuarioService.autoLogin()){
+      if(await servicioUsuario.autoLogin()){
         navigation.navigate("PageTabs");
       }else{
         navigation.navigate("LogIn");
