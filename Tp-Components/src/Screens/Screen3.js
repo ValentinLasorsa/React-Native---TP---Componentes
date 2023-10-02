@@ -1,14 +1,15 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import Boton from '../Components/Boton';
 
 const Screen3 = ({ navigation }) => {
     const handleLogout = () => {
-    navigation.navigate('Login');
+        navigation.navigate('Login');
     };
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Estás en la screen 3</Text>
-            <Button style={styles.button} title="LogOut" onPress={handleLogout} />
+            <Boton event={handleLogout} text={"LogOut"} style={styles.button}></Boton>
         </View>
     );
 };

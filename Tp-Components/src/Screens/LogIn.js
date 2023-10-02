@@ -1,34 +1,66 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TextInput, Button, StyleSheet } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, Image, TextInput, Button, StyleSheet, SafeAreaView } from 'react-native';
+import Boton from '../Components/Boton';
+import MessageConstants from '../MessageConstants';
+import UsuarioService from '../Services/UsuarioService';
 
 const LogIn = ({navigation}) => {
+  let service = new UsuarioService();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const passwordRef = useRef();
+  const staticImage = require('../../assets/Logo_Login.png')
 
-  const handleLogin = () => {
-    if ((username === "Yogui") && (password === "monty")){
-      navigation.navigate('PageTabs');
-      setUsername('');
-      setPassword('');
+  const handleLogin = async() => {
+    if (username !== "" && password !== "") {    
+      if (await service.login(username.toLowerCase(),password.toLowerCase())){
+        
+        await service.almacenarCredenciales(username.toLowerCase(),password.toLowerCase());
+        alert(MessageConstants.MSJ_USUARIO_CREADO)
+        navigation.navigate('PageTabs');
+      }
+      else{
+        alert(msjConstantes.MSJ_VALIDACION)
+      }
+    }else{
+      alert(msjConstantes.MSJ_VALIDACION)
     }
-    else{
-      alert('Usuario o contraseña incorrectos!!')
-    }
-    
   };
 
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Log in</Text>
-      <Image style={styles.image} source={require('../../assets/icon-login.png')} />
-      <br></br>
-      <TextInput style={styles.input} placeholder="Usuario" value={username} onChangeText={setUsername}/>
-      <TextInput style={styles.input} placeholder="Contraseña" secureTextEntry value={password} onChangeText={setPassword}
+    <SafeAreaView style={styles.container}>
+      <Image source={staticImage} style={styles.image}/>
+      <Text style={styles.title}>Iniciar sesión</Text>
+
+      <TextInput 
+        style={styles.input}
+        editable
+        maxLength={12} 
+        placeholder="Ingresar usuario('Yogui')" 
+        onChangeText={(text)=>setUsername(text)} 
+        value={username} 
+        returnKeyType='next' 
+        onSubmitEditing={() => { passwordRef.current.focus(); }} 
+        blurOnSubmit={false}
+        />
+        
+      <TextInput  
+        textAlignVertical=''
+        editable
+        style={styles.input} 
+        placeholder="Ingresar clave('monty')"
+        onChangeText={(text)=>setPassword(text)} 
+        value={password}
+        ref={passwordRef} 
+        secureTextEntry
       />
-      <Button style={styles.button} title="Enter" onPress={handleLogin} />
-    </View>
+      <Boton event={handleLogin} text={"Iniciar sesión"}></Boton>
+    </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

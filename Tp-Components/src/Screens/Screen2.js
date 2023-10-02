@@ -1,14 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { ToastAndroid } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import Boton from '../Components/Boton';
+import msjConstantes from '../msjConstantes';
+import ServicioUsuario from '../Services/ServicioUsuario';
 
 const Screen2 = ({ navigation }) => {
-    const handleLogout = () => {
-    navigation.navigate('Login');
-    };
+
+    const servicioUsuario = new ServicioUsuario();
+    const eliminarAsyncStorage = async () => {
+      await servicioUsuario.deleteCredenciales();
+      ToastAndroid.show(msjConstantes.MSJ_DELETE_CREDENCIALES, ToastAndroid.SHORT);
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Estás en la screen 2</Text>
-            <Button style={styles.button} title="Eliminar AsyncStorage" />
+            <Boton event={eliminarAsyncStorage} text={"Eliminar asyncStorage"} style={styles.button}></Boton>
         </View>
     );
 };

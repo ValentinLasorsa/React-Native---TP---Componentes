@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import { View, Text, Image, ActivityIndicator, Button, StyleSheet } from 'react-native';
+import { useEffect } from "react";
+import {Image, StyleSheet, SafeAreaView, ActivityIndicator } from 'react-native';
+import Logo from "../../assets/Logo.png";
+import UsuarioService from "../Services/UsuarioService";
 
-const SplashScreen = () => {
-  useEffect(() => {
-  const onLoad = async () => {
-    await new Promise(resolve => setTimeout(resolve, 3000));
-  };
-  onLoad();
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Log in</Text>
-      <Image style={styles.image} source={require('../../assets/icon-login.png')} />
-      <br></br>
-     
+const SplashScreen = ({navigation}) => { 
+    let usuarioService = new UsuarioService();
 
-
-    </View>
-  );
-};
-
+    const verificarLogIn = async() => {
+      if(await usuarioService.autoLogin()){
+        navigation.navigate("PageTabs");
+      }else{
+        navigation.navigate("LogIn");
+      }
+    }
+  
+    useEffect(() => {
+      setTimeout(verificarLogIn, 3000);
+    }, [])
+  
+    return (
+      <SafeAreaView style={[styles.container]}>
+        <Image source={Logo} style={styles.logo}/>
+        <ActivityIndicator size="large"/>
+      </SafeAreaView>
+    )
+  }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
