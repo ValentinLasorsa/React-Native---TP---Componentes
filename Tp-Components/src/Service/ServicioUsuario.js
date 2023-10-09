@@ -33,8 +33,6 @@ class ServicioUsuario{
             console.log('Error tratando de obtener credenciales.', error);
         }
         const returnValue = {'username': storedUserName, 'password' : storedPassword};
-
-        console.log('ServicioUsuario.getCredenciales', returnValue);
         return returnValue;
     }
 
@@ -49,7 +47,6 @@ class ServicioUsuario{
     }
 
     storageCredenciales = async(username,password) => {
-        console.log('ServicioUsuario.storageCredenciales');
         try{
             await AsyncStorage.setItem(USERNAME_KEY, username);
             await AsyncStorage.setItem(PASSWORD_KEY, password);

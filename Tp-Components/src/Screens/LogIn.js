@@ -15,7 +15,7 @@ const LogIn = ({navigation}) => {
     if (username !== "" && password !== "") {    
       if (await service.login(username.toLowerCase(),password.toLowerCase())){
         
-        await service.almacenarCredenciales(username.toLowerCase(),password.toLowerCase());
+        await service.storageCredenciales(username.toLowerCase(),password.toLowerCase());
         alert(MessageConstants.MSJ_USUARIO_CREADO)
         navigation.navigate('PageTabs');
       }
@@ -23,7 +23,7 @@ const LogIn = ({navigation}) => {
         alert(msjConstantes.MSJ_VALIDACION)
       }
     }else{
-      alert(msjConstantes.MSJ_VALIDACION)
+      alert(msjConstantes.MSJ_CAMPOS_ERROR)
     }
   };
 
